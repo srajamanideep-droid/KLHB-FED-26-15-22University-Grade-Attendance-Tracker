@@ -1,0 +1,315 @@
+import java.util.Scanner;
+
+class Student {
+
+    // Encapsulation
+    private String name;
+    private int rollNo;
+    private String department;
+    private int semester;
+
+
+    // Constructor
+    Student(
+            String name,
+            int rollNo,
+            String department,
+            int semester) {
+
+        this.name = name;
+        this.rollNo = rollNo;
+        this.department = department;
+        this.semester = semester;
+    }
+
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public int getRollNo() {
+        return rollNo;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+
+    public void displayStudent() {
+
+        System.out.println(
+                "Name       : " + name
+        );
+
+        System.out.println(
+                "Roll No    : " + rollNo
+        );
+
+        System.out.println(
+                "Department : " + department
+        );
+
+        System.out.println(
+                "Semester   : " + semester
+        );
+    }
+}
+
+
+/*
+ * Inheritance
+ */
+
+class UniversityStudent extends Student {
+
+    private int marks;
+
+    private int totalClasses;
+
+    private int attendedClasses;
+
+
+    UniversityStudent(
+            String name,
+            int rollNo,
+            String department,
+            int semester) {
+
+        super(
+                name,
+                rollNo,
+                department,
+                semester
+        );
+    }
+
+
+    public void setMarks(int marks) {
+
+        if (marks < 0 || marks > 100) {
+
+            throw new IllegalArgumentException(
+                    "Marks must be between 0 and 100."
+            );
+        }
+
+        this.marks = marks;
+    }
+
+
+    public void setAttendance(
+            int total,
+            int attended) {
+
+        if (total <= 0) {
+
+            throw new IllegalArgumentException(
+                    "Total classes must be positive."
+            );
+        }
+
+        if (attended < 0 ||
+                attended > total) {
+
+            throw new IllegalArgumentException(
+                    "Invalid attended classes."
+            );
+        }
+
+        this.totalClasses = total;
+        this.attendedClasses = attended;
+    }
+
+
+    public double getAttendance() {
+
+        return ((double) attendedClasses /
+                totalClasses) * 100;
+    }
+
+
+    public String getGrade() {
+
+        if (marks >= 90)
+            return "A+";
+
+        if (marks >= 80)
+            return "A";
+
+        if (marks >= 70)
+            return "B";
+
+        if (marks >= 60)
+            return "C";
+
+        if (marks >= 50)
+            return "D";
+
+        return "F";
+    }
+
+
+    public void displayReport() {
+
+        displayStudent();
+
+        System.out.println(
+                "Marks      : " + marks
+        );
+
+        System.out.println(
+                "Grade      : " + getGrade()
+        );
+
+        System.out.printf(
+                "Attendance : %.2f%%%n",
+                getAttendance()
+        );
+    }
+}
+
+
+public class CO4_UniversityTracker {
+
+    public static void main(String[] args) {
+
+        Scanner sc =
+                new Scanner(System.in);
+
+        try {
+
+            System.out.print(
+                    "Enter name: "
+            );
+
+            String name =
+                    sc.nextLine();
+
+            System.out.print(
+                    "Enter roll number: "
+            );
+
+            int rollNo =
+                    Integer.parseInt(
+                            sc.nextLine()
+                    );
+
+            System.out.print(
+                    "Enter department: "
+            );
+
+            String department =
+                    sc.nextLine();
+
+            System.out.print(
+                    "Enter semester: "
+            );
+
+            int semester =
+                    Integer.parseInt(
+                            sc.nextLine()
+                    );
+
+
+            UniversityStudent student =
+                    new UniversityStudent(
+                            name,
+                            rollNo,
+                            department,
+                            semester
+                    );
+
+
+            System.out.print(
+                    "Enter marks: "
+            );
+
+            int marks =
+                    Integer.parseInt(
+                            sc.nextLine()
+                    );
+
+            student.setMarks(marks);
+
+
+            System.out.print(
+                    "Enter total classes: "
+            );
+
+            int total =
+                    Integer.parseInt(
+                            sc.nextLine()
+                    );
+
+
+            System.out.print(
+                    "Enter attended classes: "
+            );
+
+            int attended =
+                    Integer.parseInt(
+                            sc.nextLine()
+                    );
+
+
+            student.setAttendance(
+                    total,
+                    attended
+            );
+
+
+            System.out.println(
+                    "\n========== REPORT =========="
+            );
+
+            student.displayReport();
+
+        }
+
+        catch (NumberFormatException e) {
+
+            System.out.println(
+                    "Please enter valid numbers."
+            );
+
+        }
+
+        catch (IllegalArgumentException e) {
+
+            System.out.println(
+                    "Input Error: "
+                    + e.getMessage()
+            );
+
+        }
+
+        finally {
+
+            System.out.println(
+                    "\nProgram execution completed."
+            );
+
+            sc.close();
+        }
+    }
+}
