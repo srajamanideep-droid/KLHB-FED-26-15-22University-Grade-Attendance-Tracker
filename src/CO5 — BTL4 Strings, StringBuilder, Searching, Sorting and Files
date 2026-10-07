@@ -1,0 +1,383 @@
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class StudentRecord {
+
+    String name;
+    int rollNo;
+    String department;
+    double average;
+
+    StudentRecord(
+            String name,
+            int rollNo,
+            String department,
+            double average) {
+
+        this.name = name;
+        this.rollNo = rollNo;
+        this.department = department;
+        this.average = average;
+    }
+
+
+    @Override
+    public String toString() {
+
+        return String.format(
+                "Name: %s | Roll No: %d | " +
+                "Department: %s | Average: %.2f",
+                name,
+                rollNo,
+                department,
+                average
+        );
+    }
+}
+
+
+public class CO5_UniversityTracker {
+
+    static Scanner sc =
+            new Scanner(System.in);
+
+    static ArrayList<StudentRecord>
+            students =
+            new ArrayList<>();
+
+
+    // Add student
+    static void addStudent() {
+
+        System.out.print(
+                "Enter name: "
+        );
+
+        String name =
+                sc.nextLine();
+
+        System.out.print(
+                "Enter roll number: "
+        );
+
+        int roll =
+                Integer.parseInt(
+                        sc.nextLine()
+                );
+
+        System.out.print(
+                "Enter department: "
+        );
+
+        String department =
+                sc.nextLine();
+
+        System.out.print(
+                "Enter average marks: "
+        );
+
+        double average =
+                Double.parseDouble(
+                        sc.nextLine()
+                );
+
+
+        StudentRecord student =
+                new StudentRecord(
+                        name,
+                        roll,
+                        department,
+                        average
+                );
+
+        students.add(student);
+
+        System.out.println(
+                "Student added."
+        );
+    }
+
+
+    // Search
+    static void searchStudent() {
+
+        System.out.print(
+                "Enter roll number: "
+        );
+
+        int roll =
+                Integer.parseInt(
+                        sc.nextLine()
+                );
+
+        boolean found = false;
+
+        for (StudentRecord student :
+                students) {
+
+            if (student.rollNo == roll) {
+
+                System.out.println(
+                        student
+                );
+
+                found = true;
+            }
+        }
+
+        if (!found) {
+
+            System.out.println(
+                    "Student not found."
+            );
+        }
+    }
+
+
+    // Sort
+    static void sortStudents() {
+
+        Collections.sort(
+                students,
+                Comparator.comparingDouble(
+                        student ->
+                                student.average
+                ).reversed()
+        );
+
+        System.out.println(
+                "Students sorted by marks."
+        );
+    }
+
+
+    // StringBuilder report
+    static String buildReport() {
+
+        StringBuilder sb =
+                new StringBuilder();
+
+        sb.append(
+                "====================================\n"
+        );
+
+        sb.append(
+                "       UNIVERSITY STUDENT REPORT\n"
+        );
+
+        sb.append(
+                "====================================\n"
+        );
+
+
+        for (StudentRecord student :
+                students) {
+
+            sb.append(
+                    "Name: "
+            ).append(student.name);
+
+            sb.append(
+                    "\nRoll No: "
+            ).append(student.rollNo);
+
+            sb.append(
+                    "\nDepartment: "
+            ).append(student.department);
+
+            sb.append(
+                    "\nAverage: "
+            ).append(
+                    String.format(
+                            "%.2f",
+                            student.average
+                    )
+            );
+
+            sb.append(
+                    "\n------------------------------------\n"
+            );
+        }
+
+        return sb.toString();
+    }
+
+
+    // Write file
+    static void saveToFile() {
+
+        try {
+
+            FileWriter writer =
+                    new FileWriter(
+                            "students.txt"
+                    );
+
+            writer.write(
+                    buildReport()
+            );
+
+            writer.close();
+
+            System.out.println(
+                    "Report saved successfully."
+            );
+
+        }
+
+        catch (IOException e) {
+
+            System.out.println(
+                    "File writing error: "
+                    + e.getMessage()
+            );
+        }
+    }
+
+
+    // Read file
+    static void readFromFile() {
+
+        try {
+
+            FileReader reader =
+                    new FileReader(
+                            "students.txt"
+                    );
+
+            BufferedReader br =
+                    new BufferedReader(reader);
+
+            String line;
+
+            System.out.println(
+                    "\n========== FILE CONTENT =========="
+            );
+
+            while (
+                    (line = br.readLine())
+                    != null
+            ) {
+
+                System.out.println(line);
+            }
+
+            br.close();
+
+        }
+
+        catch (IOException e) {
+
+            System.out.println(
+                    "File reading error: "
+                    + e.getMessage()
+            );
+        }
+    }
+
+
+    // Display
+    static void display() {
+
+        for (StudentRecord student :
+                students) {
+
+            System.out.println(student);
+        }
+    }
+
+
+    public static void main(String[] args) {
+
+        boolean running = true;
+
+        while (running) {
+
+            System.out.println(
+                    "\n========== MENU =========="
+            );
+
+            System.out.println(
+                    "1. Add Student"
+            );
+
+            System.out.println(
+                    "2. Display Students"
+            );
+
+            System.out.println(
+                    "3. Search Student"
+            );
+
+            System.out.println(
+                    "4. Sort Students"
+            );
+
+            System.out.println(
+                    "5. Save File"
+            );
+
+            System.out.println(
+                    "6. Read File"
+            );
+
+            System.out.println(
+                    "7. Exit"
+            );
+
+            System.out.print(
+                    "Enter choice: "
+            );
+
+            int choice =
+                    Integer.parseInt(
+                            sc.nextLine()
+                    );
+
+
+            switch (choice) {
+
+                case 1:
+                    addStudent();
+                    break;
+
+                case 2:
+                    display();
+                    break;
+
+                case 3:
+                    searchStudent();
+                    break;
+
+                case 4:
+                    sortStudents();
+                    break;
+
+                case 5:
+                    saveToFile();
+                    break;
+
+                case 6:
+                    readFromFile();
+                    break;
+
+                case 7:
+                    running = false;
+                    break;
+
+                default:
+                    System.out.println(
+                            "Invalid choice."
+                    );
+            }
+        }
+
+        sc.close();
+    }
+}
