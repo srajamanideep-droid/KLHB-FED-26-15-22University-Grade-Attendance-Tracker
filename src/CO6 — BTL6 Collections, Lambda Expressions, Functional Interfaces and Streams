@@ -1,0 +1,391 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+class Student {
+
+    private String name;
+    private int rollNo;
+    private String department;
+    private double averageMarks;
+
+
+    Student(
+            String name,
+            int rollNo,
+            String department,
+            double averageMarks) {
+
+        this.name = name;
+        this.rollNo = rollNo;
+        this.department = department;
+        this.averageMarks = averageMarks;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public int getRollNo() {
+        return rollNo;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public double getAverageMarks() {
+        return averageMarks;
+    }
+
+
+    @Override
+    public String toString() {
+
+        return String.format(
+                "%-15s %-10d %-15s %.2f",
+                name,
+                rollNo,
+                department,
+                averageMarks
+        );
+    }
+}
+
+
+/*
+ * Functional Interface
+ */
+
+@FunctionalInterface
+interface StudentFilter {
+
+    boolean test(Student student);
+}
+
+
+public class CO6_UniversityTracker {
+
+    static ArrayList<Student> students =
+            new ArrayList<>();
+
+
+    static void addStudents() {
+
+        students.add(
+                new Student(
+                        "Harsha",
+                        101,
+                        "CSE",
+                        88.5
+                )
+        );
+
+        students.add(
+                new Student(
+                        "Manideep",
+                        102,
+                        "CSE",
+                        76.5
+                )
+        );
+
+        students.add(
+                new Student(
+                        "Sreeram",
+                        103,
+                        "ECE",
+                        91.2
+                )
+        );
+
+        students.add(
+                new Student(
+                        "Rahul",
+                        104,
+                        "CSE",
+                        68.4
+                )
+        );
+
+        students.add(
+                new Student(
+                        "Kiran",
+                        105,
+                        "IT",
+                        84.6
+                )
+        );
+    }
+
+
+    // Display using lambda
+    static void displayStudents() {
+
+        System.out.println(
+                "\n========== ALL STUDENTS =========="
+        );
+
+        students.forEach(
+                student ->
+                        System.out.println(student)
+        );
+    }
+
+
+    // Filter high scorers
+    static void highScorers() {
+
+        System.out.println(
+                "\n========== HIGH SCORERS =========="
+        );
+
+        students.stream()
+
+                .filter(
+                        student ->
+                                student.getAverageMarks()
+                                >= 80
+                )
+
+                .forEach(
+                        student ->
+                                System.out.println(student)
+                );
+    }
+
+
+    // Filter passed students
+    static void passedStudents() {
+
+        System.out.println(
+                "\n========== PASSED STUDENTS =========="
+        );
+
+        students.stream()
+
+                .filter(
+                        student ->
+                                student.getAverageMarks()
+                                >= 50
+                )
+
+                .forEach(
+                        student ->
+                                System.out.println(student)
+                );
+    }
+
+
+    // Sort by marks
+    static void sortByMarks() {
+
+        System.out.println(
+                "\n========== SORTED BY MARKS =========="
+        );
+
+        students.stream()
+
+                .sorted(
+                        Comparator.comparingDouble(
+                                Student::getAverageMarks
+                        ).reversed()
+                )
+
+                .forEach(
+                        student ->
+                                System.out.println(student)
+                );
+    }
+
+
+    // Sort by name
+    static void sortByName() {
+
+        System.out.println(
+                "\n========== SORTED BY NAME =========="
+        );
+
+        students.stream()
+
+                .sorted(
+                        Comparator.comparing(
+                                Student::getName
+                        )
+                )
+
+                .forEach(
+                        student ->
+                                System.out.println(student)
+                );
+    }
+
+
+    // Map student names
+    static void displayNames() {
+
+        System.out.println(
+                "\n========== STUDENT NAMES =========="
+        );
+
+        students.stream()
+
+                .map(
+                        Student::getName
+                )
+
+                .forEach(
+                        System.out::println
+                );
+    }
+
+
+    // Average using stream
+    static void classAverage() {
+
+        double average =
+                students.stream()
+
+                        .mapToDouble(
+                                Student::getAverageMarks
+                        )
+
+                        .average()
+
+                        .orElse(0.0);
+
+        System.out.printf(
+                "\nClass Average: %.2f%n",
+                average
+        );
+    }
+
+
+    // Highest scorer
+    static void topStudent() {
+
+        Student top =
+                students.stream()
+
+                        .max(
+                                Comparator.comparingDouble(
+                                        Student
+                                                ::getAverageMarks
+                                )
+                        )
+
+                        .orElse(null);
+
+        if (top != null) {
+
+            System.out.println(
+                    "\n========== TOP STUDENT =========="
+            );
+
+            System.out.println(top);
+        }
+    }
+
+
+    // Count students
+    static void countStudents() {
+
+        long count =
+                students.stream()
+                        .count();
+
+        System.out.println(
+                "\nTotal Students: "
+                + count
+        );
+    }
+
+
+    // Collect students above 75
+    static void collectStudents() {
+
+        List<Student> result =
+                students.stream()
+
+                        .filter(
+                                student ->
+                                        student
+                                                .getAverageMarks()
+                                                >= 75
+                        )
+
+                        .collect(
+                                Collectors.toList()
+                        );
+
+        System.out.println(
+                "\nStudents with 75+ marks:"
+        );
+
+        result.forEach(
+                System.out::println
+        );
+    }
+
+
+    // Functional interface
+    static void customFilter(
+            StudentFilter filter) {
+
+        System.out.println(
+                "\n========== CUSTOM FILTER =========="
+        );
+
+        for (Student student :
+                students) {
+
+            if (filter.test(student)) {
+
+                System.out.println(student);
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
+
+        addStudents();
+
+        displayStudents();
+
+        highScorers();
+
+        passedStudents();
+
+        sortByMarks();
+
+        sortByName();
+
+        displayNames();
+
+        classAverage();
+
+        topStudent();
+
+        countStudents();
+
+        collectStudents();
+
+
+        /*
+         * Lambda expression with
+         * functional interface
+         */
+
+        customFilter(
+                student ->
+                        student
+                                .getDepartment()
+                                .equalsIgnoreCase("CSE")
+        );
+    }
+}
