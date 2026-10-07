@@ -1,0 +1,243 @@
+import java.util.Scanner;
+
+public class CO3_UniversityTracker {
+
+    static Scanner sc = new Scanner(System.in);
+
+    static String[] subjects = {
+            "Java",
+            "Digital Logic",
+            "Mathematics",
+            "English",
+            "Computer Architecture"
+    };
+
+    static int[] marks = new int[5];
+
+    static int[] totalClasses = new int[5];
+
+    static int[] attendedClasses = new int[5];
+
+
+    // Method 1: Read marks
+    static void readMarks() {
+
+        System.out.println("\n========== ENTER MARKS ==========");
+
+        for (int i = 0;
+             i < subjects.length;
+             i++) {
+
+            System.out.print(
+                    "Enter marks for "
+                    + subjects[i]
+                    + ": "
+            );
+
+            marks[i] = sc.nextInt();
+        }
+    }
+
+
+    // Method 2: Read attendance
+    static void readAttendance() {
+
+        System.out.println(
+                "\n========== ENTER ATTENDANCE =========="
+        );
+
+        for (int i = 0;
+             i < subjects.length;
+             i++) {
+
+            System.out.println(
+                    "\nSubject: "
+                    + subjects[i]
+            );
+
+            System.out.print(
+                    "Total classes: "
+            );
+
+            totalClasses[i] = sc.nextInt();
+
+            System.out.print(
+                    "Attended classes: "
+            );
+
+            attendedClasses[i] = sc.nextInt();
+        }
+    }
+
+
+    // Method 3: Grade
+    static String calculateGrade(int mark) {
+
+        if (mark >= 90)
+            return "A+";
+
+        else if (mark >= 80)
+            return "A";
+
+        else if (mark >= 70)
+            return "B";
+
+        else if (mark >= 60)
+            return "C";
+
+        else if (mark >= 50)
+            return "D";
+
+        else
+            return "F";
+    }
+
+
+    // Method 4: Attendance
+    static double calculateAttendance(
+            int total,
+            int attended) {
+
+        if (total == 0)
+            return 0;
+
+        return ((double) attended / total) * 100;
+    }
+
+
+    // Method 5: Total marks
+    static int calculateTotal() {
+
+        int total = 0;
+
+        for (int mark : marks) {
+
+            total += mark;
+        }
+
+        return total;
+    }
+
+
+    // Method 6: Average
+    static double calculateAverage() {
+
+        int total = calculateTotal();
+
+        return (double) total / marks.length;
+    }
+
+
+    // Method 7: Highest
+    static int findHighest() {
+
+        int highest = marks[0];
+
+        for (int mark : marks) {
+
+            if (mark > highest) {
+
+                highest = mark;
+            }
+        }
+
+        return highest;
+    }
+
+
+    // Method 8: Lowest
+    static int findLowest() {
+
+        int lowest = marks[0];
+
+        for (int mark : marks) {
+
+            if (mark < lowest) {
+
+                lowest = mark;
+            }
+        }
+
+        return lowest;
+    }
+
+
+    // Method 9: Display report
+    static void displayReport() {
+
+        System.out.println(
+                "\n=========================================="
+        );
+
+        System.out.println(
+                "             STUDENT REPORT"
+        );
+
+        System.out.println(
+                "=========================================="
+        );
+
+        for (int i = 0;
+             i < subjects.length;
+             i++) {
+
+            double attendance =
+                    calculateAttendance(
+                            totalClasses[i],
+                            attendedClasses[i]
+                    );
+
+            System.out.println(
+                    "\nSubject: "
+                    + subjects[i]
+            );
+
+            System.out.println(
+                    "Marks: "
+                    + marks[i]
+            );
+
+            System.out.println(
+                    "Grade: "
+                    + calculateGrade(marks[i])
+            );
+
+            System.out.printf(
+                    "Attendance: %.2f%%%n",
+                    attendance
+            );
+        }
+
+        System.out.println(
+                "\nTotal Marks: "
+                + calculateTotal()
+        );
+
+        System.out.printf(
+                "Average: %.2f%n",
+                calculateAverage()
+        );
+
+        System.out.println(
+                "Highest: "
+                + findHighest()
+        );
+
+        System.out.println(
+                "Lowest: "
+                + findLowest()
+        );
+    }
+
+
+    public static void main(String[] args) {
+
+        readMarks();
+
+        readAttendance();
+
+        displayReport();
+
+        sc.close();
+    }
+}
