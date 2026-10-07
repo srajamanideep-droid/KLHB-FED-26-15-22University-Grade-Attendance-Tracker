@@ -1,0 +1,147 @@
+import java.util.Scanner;
+
+public class CO2_UniversityTracker {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("======================================");
+        System.out.println("       GRADE & ATTENDANCE SYSTEM");
+        System.out.println("======================================");
+
+        boolean running = true;
+
+        while (running) {
+
+            System.out.println("\n========== MENU ==========");
+            System.out.println("1. Calculate Grade");
+            System.out.println("2. Calculate Attendance");
+            System.out.println("3. Check Eligibility");
+            System.out.println("4. Display Subjects");
+            System.out.println("5. Exit");
+
+            System.out.print("Enter choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+
+                    System.out.print("Enter marks: ");
+                    int marks = sc.nextInt();
+
+                    if (marks >= 90) {
+                        System.out.println("Grade: A+");
+                    }
+                    else if (marks >= 80) {
+                        System.out.println("Grade: A");
+                    }
+                    else if (marks >= 70) {
+                        System.out.println("Grade: B");
+                    }
+                    else if (marks >= 60) {
+                        System.out.println("Grade: C");
+                    }
+                    else if (marks >= 50) {
+                        System.out.println("Grade: D");
+                    }
+                    else {
+                        System.out.println("Grade: F");
+                    }
+
+                    break;
+
+                case 2:
+
+                    System.out.print("Enter total classes: ");
+                    int total = sc.nextInt();
+
+                    System.out.print("Enter attended classes: ");
+                    int attended = sc.nextInt();
+
+                    if (total > 0 && attended <= total) {
+
+                        double attendance =
+                                ((double) attended / total) * 100;
+
+                        System.out.printf(
+                                "Attendance: %.2f%%%n",
+                                attendance
+                        );
+
+                    }
+                    else {
+
+                        System.out.println(
+                                "Invalid attendance details."
+                        );
+                    }
+
+                    break;
+
+                case 3:
+
+                    System.out.print("Enter attendance percentage: ");
+                    double percentage = sc.nextDouble();
+
+                    if (percentage >= 75) {
+
+                        System.out.println(
+                                "Student is Eligible."
+                        );
+
+                    }
+                    else {
+
+                        System.out.println(
+                                "Student is Not Eligible."
+                        );
+                    }
+
+                    break;
+
+                case 4:
+
+                    String[] subjects = {
+                            "Java",
+                            "Digital Logic",
+                            "Mathematics",
+                            "English",
+                            "Computer Architecture"
+                    };
+
+                    System.out.println("\nSubjects:");
+
+                    for (int i = 0;
+                         i < subjects.length;
+                         i++) {
+
+                        System.out.println(
+                                (i + 1) + ". " + subjects[i]
+                        );
+                    }
+
+                    break;
+
+                case 5:
+
+                    running = false;
+
+                    System.out.println(
+                            "Program terminated."
+                    );
+
+                    break;
+
+                default:
+
+                    System.out.println(
+                            "Invalid choice."
+                    );
+            }
+        }
+
+        sc.close();
+    }
+}
