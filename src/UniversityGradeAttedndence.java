@@ -30,7 +30,7 @@ class Student {
 }
 
 class UniversityStudent extends Student {
-
+ 
     static final double MIN_ATTENDANCE = 75.0;
 
     String getGrade(int mark) {
