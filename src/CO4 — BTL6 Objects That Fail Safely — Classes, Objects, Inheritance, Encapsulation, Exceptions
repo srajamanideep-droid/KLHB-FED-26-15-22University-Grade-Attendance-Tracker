@@ -4,7 +4,7 @@ class Student {
 
     // Encapsulation
     private String name;
-    private int rollNo;
+    private int rollNo;  
     private String department;
     private int semester;
 
