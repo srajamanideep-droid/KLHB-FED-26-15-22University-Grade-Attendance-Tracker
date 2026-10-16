@@ -23,7 +23,7 @@ class Student {
 
     String studentDetails() {
         return String.format(
-            "Name: %s%nRoll No: %d%nDepartment: %s%nSemester: %d%n",
+            "Name: %s%nRoll No: %d%nDepartment: %s%nSemester: %d%n", 
             name, rollNo, department, semester
         );
     }
