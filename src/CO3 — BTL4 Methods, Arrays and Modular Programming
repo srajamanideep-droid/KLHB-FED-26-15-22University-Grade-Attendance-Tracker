@@ -4,7 +4,7 @@ public class CO3_UniversityTracker {
 
     static Scanner sc = new Scanner(System.in);
 
-    static String[] subjects = {
+    static String[] subjects = {  
             "Java",
             "Digital Logic",
             "Mathematics",
