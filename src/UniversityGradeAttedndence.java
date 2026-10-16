@@ -37,7 +37,7 @@ class UniversityStudent extends Student {
         if (mark >= 90) return "A+";
         if (mark >= 80) return "A";
         if (mark >= 70) return "B";
-        if (mark >= 60) return "C";
+        if (mark >= 60) return "C"; 
         if (mark >= 50) return "D";
         return "F";
     }
