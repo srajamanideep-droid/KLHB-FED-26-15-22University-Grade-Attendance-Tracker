@@ -6,7 +6,7 @@ class Student {
 
     String name;
     int rollNo;
-    String department;
+    String department;   
     int semester;
 
     final String[] subjects = {
