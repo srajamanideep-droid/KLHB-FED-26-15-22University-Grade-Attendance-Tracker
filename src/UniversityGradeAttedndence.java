@@ -87,7 +87,7 @@ class UniversityStudent extends Student {
 
         return sb.toString();
     }
-
+ 
     void displayReport() {
         System.out.println();
         System.out.print(buildReport());
