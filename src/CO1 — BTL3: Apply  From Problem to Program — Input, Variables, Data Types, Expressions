@@ -10,7 +10,7 @@ public class CO1_UniversityTracker {
         System.out.println(" UNIVERSITY GRADE & ATTENDANCE TRACKER");
         System.out.println("======================================");
 
-        // Primitive data types
+        // Primitive data types  
         int rollNo;
         int semester;
 
