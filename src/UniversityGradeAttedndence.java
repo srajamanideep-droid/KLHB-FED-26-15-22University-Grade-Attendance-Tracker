@@ -17,7 +17,7 @@ class Student {
         "Computer Architecture"  
     };
 
-    int[] marks = new int[subjects.length];
+    int[] marks = new int[subjects.length]; 
     int[] totalClasses = new int[subjects.length];    
     int[] attendedClasses = new int[subjects.length];
 
