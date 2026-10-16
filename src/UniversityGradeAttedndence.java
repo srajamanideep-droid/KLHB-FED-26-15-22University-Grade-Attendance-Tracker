@@ -19,7 +19,7 @@ class Student {
 
     int[] marks = new int[subjects.length]; 
     int[] totalClasses = new int[subjects.length];    
-    int[] attendedClasses = new int[subjects.length];
+    int[] attendedClasses = new int[subjects.length]; 
 
     String studentDetails() {
         return String.format(
