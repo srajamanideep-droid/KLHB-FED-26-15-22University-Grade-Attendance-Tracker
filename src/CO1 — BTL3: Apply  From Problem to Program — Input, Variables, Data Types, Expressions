@@ -5,7 +5,7 @@ public class CO1_UniversityTracker {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-
+  
         System.out.println("======================================");
         System.out.println(" UNIVERSITY GRADE & ATTENDANCE TRACKER");
         System.out.println("======================================");
