@@ -8,7 +8,7 @@ public class CO3_UniversityTracker {
             "Java",
             "Digital Logic",
             "Mathematics",
-            "English",
+            "English", 
             "Computer Architecture"
     };
 
