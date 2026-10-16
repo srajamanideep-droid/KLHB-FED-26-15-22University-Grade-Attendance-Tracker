@@ -99,7 +99,7 @@ class UniversityStudent extends Student {
         } catch (IOException e) {
             System.out.println("Unable to create report: " + e.getMessage());
             return;
-        }
+        } 
         System.out.println("\nReport generated successfully.");
         System.out.println("Saved as: " + fileName);
     }
