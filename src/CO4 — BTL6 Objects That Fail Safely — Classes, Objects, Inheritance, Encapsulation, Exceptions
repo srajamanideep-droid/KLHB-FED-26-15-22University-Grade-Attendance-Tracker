@@ -3,7 +3,7 @@ import java.util.Scanner;
 class Student {
 
     // Encapsulation
-    private String name;
+    private String name;   
     private int rollNo;  
     private String department;
     private int semester;   
