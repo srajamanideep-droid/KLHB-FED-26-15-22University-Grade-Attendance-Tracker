@@ -1,5 +1,5 @@
 import java.util.Scanner;
-   
+      
 public class CO1_UniversityTracker {
 
     public static void main(String[] args) {
