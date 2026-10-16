@@ -60,7 +60,7 @@ class UniversityStudent extends Student {
     // Single source of truth for the report (used for console AND file)
     String buildReport() {
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(); 
 
         sb.append(String.format("========== UNIVERSITY REPORT ==========%n"));
         sb.append(studentDetails());
