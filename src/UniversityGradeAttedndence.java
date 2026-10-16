@@ -14,7 +14,7 @@ class Student {
         "Digital Logic",
         "Mathematics",
         "English",
-        "Computer Architecture" 
+        "Computer Architecture"  
     };
 
     int[] marks = new int[subjects.length];
