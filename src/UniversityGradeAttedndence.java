@@ -121,7 +121,7 @@ class UniversityGradeAttendance {
 
     // Keeps asking until an integer within [min, max] is entered
     static int readInt(Scanner sc, String prompt, int min, int max) {
-        while (true) {
+        while (true) { 
             System.out.print(prompt);
             try {
                 int value = Integer.parseInt(sc.nextLine().trim());
