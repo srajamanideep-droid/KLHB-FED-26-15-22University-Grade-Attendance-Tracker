@@ -11,7 +11,7 @@ class Student {
   
     final String[] subjects = {
         "Java", 
-        "Digital Logic",
+        "Digital Logic", 
         "Mathematics",
         "English",
         "Computer Architecture"   
