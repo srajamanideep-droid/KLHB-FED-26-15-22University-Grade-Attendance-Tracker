@@ -10,7 +10,7 @@ class Student {
     int semester;
  
     final String[] subjects = {
-        "Java",
+        "Java", 
         "Digital Logic",
         "Mathematics",
         "English",
