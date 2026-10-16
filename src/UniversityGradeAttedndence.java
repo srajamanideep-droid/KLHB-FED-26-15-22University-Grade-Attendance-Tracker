@@ -54,7 +54,7 @@ class UniversityStudent extends Student {
         for (int m : marks) {
             sum += m;
         }
-        return (double) sum / marks.length;
+        return (double) sum / marks.length; 
     }
 
     // Single source of truth for the report (used for console AND file)
