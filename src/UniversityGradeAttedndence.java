@@ -8,7 +8,7 @@ class Student {
     int rollNo;
     String department;   
     int semester;
-
+ 
     final String[] subjects = {
         "Java",
         "Digital Logic",
