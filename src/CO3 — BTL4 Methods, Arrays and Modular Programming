@@ -12,7 +12,7 @@ public class CO3_UniversityTracker {
             "Computer Architecture"
     };
 
-    static int[] marks = new int[5];
+    static int[] marks = new int[5]; 
 
     static int[] totalClasses = new int[5];
 
